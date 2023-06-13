@@ -7,7 +7,7 @@ In this paper we investigate the solution of path-dependent partial differential
 & u(T, \omega)=g(\omega), \quad t \in[0, T], \quad \omega \in C\left([0, T] ; \mathbb{R}^d\right),
 \end{aligned}
 ```
-where $u:[0, T] \times C\left([0, T], \mathbb{R}^d\right) \rightarrow \mathbb{R}$ is the path-dependent solution of above PPDE, and $b,\sigma,r,f$ are functions with corresponding dimensions. By functional Feynman-Kac formula, we can write the solution of PPDE as the condtional expectation, and this open the possibility of using neural network to approximate the solution, which has been studied in previous literatures like [[Deep-PPDE](https://github.com/msabvid/Deep-PPDE)]. In this paper, we propose a solver based on neural rough differential equation network [[NRDE](https://github.com/jambo6/neuralRDEs/tree/master)], and the reason of choosing this specific network is its capability to tackle long time series efficiently by using log-signature as the path representation. We showcase that the proposed model enjoys the memory efficiency of the NRDE model and by introducing an extra embedding layer, the model is scalable with increasing dimensionality. ![EL-NRDE sovler](https://github.com/FrankFang98/PPDE-CDE/blob/main/EL-NRDE%20solver.png)
+where $u:[0, T] \times C\left([0, T], \mathbb{R}^d\right) \rightarrow \mathbb{R}$ is the path-dependent solution of above PPDE, and $b,\sigma,r,f$ are functions with corresponding dimensions. By functional Feynman-Kac formula, we can write the solution of PPDE as the condtional expectation, and this open the possibility of using neural network to approximate the solution, which has been studied in previous literatures like [[Deep-PPDE](https://github.com/msabvid/Deep-PPDE)]. In this paper, we propose a solver based on neural rough differential equation network [[NRDE](https://github.com/jambo6/neuralRDEs/tree/master)], and the reason of choosing this specific network is its capability to tackle long time series efficiently by using log-signature as the path representation. We showcase that the proposed model enjoys the memory efficiency of the NRDE model and by introducing an extra embedding layer, the model is scalable with increasing dimensionality. ![EL-NRDE sovler](https://github.com/FrankFang98/NRDE-PPDE/blob/main/EL-NRDE%20solver.png)
 
 
 
@@ -24,4 +24,7 @@ Install the required packages by running:
 - `pip install signatory==1.2.6.1.7.1 --no-cache-dir --force-reinstall`
 The signatory have to be installed after the installation of corresponding `Pytorch` version, otherwise it may cause error message. 
 
+## Structure of the code
+### Solver
+The code for our NRDE solver for PPDE is in the 
 
