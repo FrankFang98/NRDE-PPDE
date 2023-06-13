@@ -20,7 +20,7 @@ class PPDE(nn.Module):
         self.withx=withx #Specify whether we use NRDE model that also include X_t dimension during each update
         self.depth = depth #depth of log-sinature
         self.d_red=d_red #Boolean value specify whether we use embedding layer to reduce the dimension or not
-    
+        self.ncdrift=ncdrift
         if self.d_red:
             self.sig_channels = signatory.logsignature_channels(in_channels=self.d_after+1, depth=depth) # x2 because we do lead-lag
             self.dim_red=RNN(rnn_in=self.d,rnn_hidden=lstm_hid,ffn_sizes=[lstm_hid]+[self.d_after])
