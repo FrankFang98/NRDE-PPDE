@@ -27,7 +27,7 @@ The signatory have to be installed after the installation of corresponding `Pyto
 ## Structure of the code
 ### Solver
 The code for our NRDE solver for PPDE is in the [NRDE_Solver.py](https://github.com/FrankFang98/NRDE-PPDE/blob/main/Solver/NRDE_Solver.py) file under the [Solver](https://github.com/FrankFang98/NRDE-PPDE/tree/main/Solver) folder. In the folder we also include the package for the general neural RDE network, which we will use to build our solver.
-#### Call our model
+#### Call the NRDE network
 ```Python
 self.sig_channels = signatory.logsignature_channels(in_channels=self.d+1, depth=depth)
 self.f = nrde.model.NeuralRDE(initial_dim=self.d+1, logsig_dim=self.sig_channels, hidden_dim=hidden, output_dim=output, num_layers=num_layers,hidden_hidden_dim=ffn_hidden,solver=odesolver,odestep=odestep
@@ -67,3 +67,11 @@ def cond_exp(self, ts: torch.Tensor, x0: torch.Tensor, option: Lookback, lag: in
 ### Experiment
 The [Experiment](https://github.com/FrankFang98/NRDE-PPDE/tree/main/Experiment) folder contains the three experiments we conduct. For example, to run the heat equation's experiment with dimension $d=4$ and no embedding layer, 
 - `python Heat_nrde.py --d 4 --d_red False`
+After the training, the model parameters will be stored in the [numerical_results](https://github.com/FrankFang98/NRDE-PPDE/tree/main/numerical_results) folder.
+```Python
+result = {"state":ppde.state_dict(),
+            "loss":losses}
+torch.save(result, os.path.join(base_dir, "model_{}.tar".format(d)))
+```
+### Numerical result
+This folder contains all the models we get for each experiment. 
