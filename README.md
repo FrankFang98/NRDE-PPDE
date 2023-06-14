@@ -26,5 +26,44 @@ The signatory have to be installed after the installation of corresponding `Pyto
 
 ## Structure of the code
 ### Solver
-The code for our NRDE solver for PPDE is in the 
-
+The code for our NRDE solver for PPDE is in the [NRDE_Solver.py](https://github.com/FrankFang98/NRDE-PPDE/blob/main/Solver/NRDE_Solver.py) file under the [Solver](https://github.com/FrankFang98/NRDE-PPDE/tree/main/Solver) folder. In the folder we also include the package for the general neural RDE network, which we will use to build our solver.
+#### Call our model
+```Python
+self.sig_channels = signatory.logsignature_channels(in_channels=self.d+1, depth=depth)
+self.f = nrde.model.NeuralRDE(initial_dim=self.d+1, logsig_dim=self.sig_channels, hidden_dim=hidden, output_dim=output, num_layers=num_layers,hidden_hidden_dim=ffn_hidden,solver=odesolver,odestep=odestep
+self.dfdx= nrde.model.NeuralRDE(initial_dim=self.d+1, logsig_dim=self.sig_channels, hidden_dim=hidden, output_dim=self.d, num_layers=num_layers,hidden_hidden_dim=ffn_hidden,solver=odesolver,odestep=odestep)
+```
+#### Define the objective function.
+```Python
+def cond_exp(self, ts: torch.Tensor, x0: torch.Tensor, option: Lookback, lag: int,drop:bool): 
+        if self.d_red:
+            x_copy,x, path_signature, brownian_increments = self.prepare_data(ts,x0,lag,drop)
+            payoff = option.payoff(x_copy) 
+        else:
+            x,path_signature,brownian_increments=self.prepare_data(ts, x0, lag, drop)
+            payoff=option.payoff(x)
+        device = x.device
+        batch_size = x.shape[0]
+        t = ts[::lag]
+        x1=x[:,::lag,:]
+        t0=torch.zeros(batch_size,len(t),1,device=device)
+        x1=torch.cat([t0,x1],2)
+        if not self.withx:
+            Y = self.f((x1[:,0,:],path_signature))
+        else:
+            Y = self.f((x1[:,0,:],path_signature,x[:,::lag,:]))
+        loss_fn = nn.MSELoss()
+        loss = 0
+        for idx,idt in enumerate(ts[::lag]):
+            if self.ncdrift:
+                discount_factor = torch.exp(-self.mu*0.5*(t[-1]**2-idt**2))
+            else:
+                discount_factor = torch.exp(-self.mu*(t[-1]-idt))
+            target = discount_factor*payoff 
+            pred = Y[:,idx,:] 
+            loss += loss_fn(pred, target)
+        return loss, Y,payoff
+```
+### Experiment
+The [Experiment](https://github.com/FrankFang98/NRDE-PPDE/tree/main/Experiment) folder contains the three experiments we conduct. For example, to run the heat equation's experiment with dimension $d=4$ and no embedding layer, 
+- `python Heat_nrde.py --d 4 --d_red False`
