@@ -18,7 +18,7 @@ We strongly recommend checking the following repositories relating to Neural-ODE
 - Neural RDE [[NRDE](https://github.com/jambo6/neuralRDEs/tree/master)]: Neural rough differential equation network we use in our paper.
 - Deep PPDE [[Deep-PPDE](https://github.com/msabvid/Deep-PPDE)]: Using LSTM network with signature input to approximate solution of PPDE.
 
-### Set up environment
+### Set up the environment
 Install the required packages by running:
 - `pip install -r requirement.txt`
 - `pip install signatory==1.2.6.1.7.1 --no-cache-dir --force-reinstall`
@@ -74,4 +74,4 @@ result = {"state":ppde.state_dict(),
 torch.save(result, os.path.join(base_dir, "model_{}.tar".format(d)))
 ```
 ### Numerical result
-This folder contains all the models we get for each experiment. 
+This folder contains all the models we get for each experiment. The `.tar` file contains all the model parameters and could be loaded using `torch.load` and `model.load_state_dict` functions once we specify the hyperparameters of the model. We include a jupyter notebook [Report](https://github.com/FrankFang98/NRDE-PPDE/blob/main/Report.ipynb) in the main directory to illustrate this procedure and generate the plot and result from the paper.
