@@ -75,3 +75,15 @@ torch.save(result, os.path.join(base_dir, "model_{}.tar".format(d)))
 ```
 ### Numerical result
 This folder contains all the models we get for each experiment. The `.tar` file contains all the model parameters and could be loaded using `torch.load` and `model.load_state_dict` functions once we specify the hyperparameters of the model. We include a jupyter notebook [Report](https://github.com/FrankFang98/NRDE-PPDE/blob/main/Report.ipynb) in the main directory to illustrate this procedure and generate the plot and result from the paper.
+
+## Citation
+```
+@misc{fang2023neural,
+      title={A Neural RDE-based model for solving path-dependent PDEs}, 
+      author={Bowen Fang and Hao Ni and Yue Wu},
+      year={2023},
+      eprint={2306.01123},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+```
