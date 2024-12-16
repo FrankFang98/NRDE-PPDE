@@ -16,7 +16,7 @@ We strongly recommend checking the following repositories relating to Neural-ODE
 - torchdiffeq [[torchdiffeq](https://github.com/rtqichen/torchdiffeq)]: A differentiable ODE solvers with full GPU support and adjoint backpropagation using $\mathcal{O}(1)$ memory.
 - Neural CDE [[torchcde](https://github.com/patrick-kidger/torchcde)]: Neural controlled differential equation network that generalise NODE and incorporate sequential input. 
 - Neural RDE [[NRDE](https://github.com/jambo6/neuralRDEs/tree/master)]: Neural rough differential equation network we use in our paper.
-- Deep PPDE [[Deep-PPDE](https://github.com/msabvid/Deep-PPDE)]: Using LSTM network with signature input to approximate solution of PPDE.
+- Deep PPDE [[Deep-PPDE](https://github.com/msabvid/Deep-PPDE)]: Using LSTM network with signature input to approximate solution of PPDE, which is our baseline.
 
 ### Set up the environment
 Install the required packages by running:
