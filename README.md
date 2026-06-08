@@ -1,4 +1,4 @@
-# A neural rough differential equation netowrk based solver for path-dependent partial differential equation.   [[arXiv](https://arxiv.org/abs/2306.01123)]
+# A neural rough differential equation netowrk based solver for path-dependent partial differential equation.   [[Stochastic Analysis and Applications 2025](https://doi.org/10.1007/978-3-032-03914-9_9)]
 ## Overview 
 In this paper we investigate the solution of path-dependent partial differential equation (PPDE) of the form
 ```math
@@ -78,12 +78,12 @@ This folder contains all the models we get for each experiment. The `.tar` file 
 
 ## Citation
 ```
-@misc{fang2023neural,
-      title={A Neural RDE-based model for solving path-dependent PDEs}, 
-      author={Bowen Fang and Hao Ni and Yue Wu},
-      year={2023},
-      eprint={2306.01123},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@inproceedings{fang2024neural,
+  title={A Neural RDE-Based Model for Solving Path-Dependent Parabolic PDEs},
+  author={Fang, Bowen and Ni, Hao and Wu, Yue},
+  booktitle={Conference on Modern Topics in Stochastic Analysis and Applications (in honour of Terry Lyons’ 70th birthday)},
+  pages={231--271},
+  year={2024},
+  organization={Springer}
 }
 ```
